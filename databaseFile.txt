@@ -1,0 +1,33 @@
+create database idbcbankdatabase;
+use idbcbankdatabase;
+drop table customer;
+-----------------------------# Creating Customer Table -------------------------------------
+create table  customer(customerid int not null primary key,firstname varchar(20)not null,lastname varchar(20)not null
+,dateOfBirth date not null,contact double);
+insert into customer(customerid,firstname,lastname,dateOfBirth,contact)values(1,'Ateek','khan','2000-10-23',384763374);
+
+
+----------------------#Creating Account Table --------------------------------
+create table customerAccount(accountnumber bigint auto_increment primary key ,acountype varchar(20), amount float not null, interest float default 0 ,DateAndTime datetime default now(),
+customerid int not null,foreign key(customerid)references customer(customerid) on delete cascade)auto_increment=111122223410;
+
+drop table customer;
+drop table  customerAccount;
+drop table logtable;
+
+insert into customerAcount(deposite,customerid)values(450.99,1);
+drop table customerAcount;	
+
+
+desc  customer;
+desc  customerAccount;
+desc logtable;
+------------------------#log Table ---------------------------
+create table logtable(logid int primary key auto_increment,transactiondate datetime default now(), accountnumber bigint,transactiontype varchar(40),
+amount long ,foreign key(accountnumber)references customerAccount(accountnumber)on delete cascade)auto_increment=842;
+
+insert into logtable(accountnumber,transactiontype,amount)values(111122223410,'Paying',1234);
+
+select*from customer;
+select*from customerAccount;
+select * from logtable;
